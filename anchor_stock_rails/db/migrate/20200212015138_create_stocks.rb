@@ -3,7 +3,7 @@ class CreateStocks < ActiveRecord::Migration[5.2]
     create_table :stocks do |t|
       t.string :symbol
       t.integer :amount
-      t.integer :price
+      t.float :price
 
       t.timestamps
     end
