@@ -1,3 +1,3 @@
 class UserSerializer < ActiveModel::Serializer
-  attributes :id, :username, :amount, :money
+  attributes :id, :username, :amount, :money_amount
 end
