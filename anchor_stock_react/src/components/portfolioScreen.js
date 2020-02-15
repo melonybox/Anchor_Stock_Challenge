@@ -1,6 +1,6 @@
 import React from 'react';
 import {connect} from 'react-redux';
-// import {null} from '../actions/actions.js'
+import {getStockFetch} from '../actions/actions.js'
 
 class PortfolioScreen extends React.PureComponent {
   state = {
@@ -14,11 +14,19 @@ class PortfolioScreen extends React.PureComponent {
     });
   }
 
+  handleSubmit = event => {
+    event.preventDefault()
+    const data = {...this.state}
+
+    this.props.getStockFetch(data)
+  }
+
+
   render(){
     return(
       <div>
         <p>Cash: ${this.props.currentUser.money_amount}</p>
-        <form>
+        <form onSubmit={this.handleSubmit}>
           <div>
             <label>Ticker: </label>
             <input type='text' name='symbolSearch' placeholder='Ticker' onChange={this.handleChange} />
@@ -38,5 +46,8 @@ const mapStateToProps = state => ({
   currentUser: state.currentUser
 })
 
+const mapDispatchToProps = dispatch => ({
+  getStockFetch: data => dispatch(getStockFetch(data)),
+})
 
-export default connect(mapStateToProps,null)(PortfolioScreen);
+export default connect(mapStateToProps,mapDispatchToProps)(PortfolioScreen);

@@ -46,6 +46,22 @@ export const userCreateFetch = data => {
   }
 }
 
+export const getStockFetch = data => {
+  return dispatch => {
+    return fetch(`https://cloud.iexapis.com/stable/stock/${data.symbolSearch}/quote?token=${process.env.REACT_APP_API_KEY}`, {
+      method: "GET",
+      headers: {
+        'Content-Type': 'application/json',
+        'Accept': 'application/json'
+      }
+    })
+      .then(resp => Promise.all([resp.json(),data]))
+      .then(data => {
+        // data[0].latestPrice
+      })
+  }
+}
+
 export const loginUser = data => ({
     type: 'LOGIN_USER',
     payload: data
