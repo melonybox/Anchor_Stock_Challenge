@@ -12,4 +12,12 @@ class Api::V1::UsersController < ApplicationController
 			render json: {errors: user.errors.full_messages}
 		end
 	end
+
+  def buyStock
+    params[:stockPrice]
+    params[:stockSymbol]
+    params[:stockAmount]
+    params[:userId]
+    byebug
+  end
 end
