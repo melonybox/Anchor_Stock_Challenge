@@ -75,7 +75,7 @@ export const getStockBuyFetch = data => {
     })
       .then(resp => resp.json())
       .then(data => {
-        // data[0].latestPrice
+        debugger
       })
   }
 }
