@@ -57,6 +57,24 @@ export const getStockFetch = data => {
     })
       .then(resp => Promise.all([resp.json(),data]))
       .then(data => {
+        dispatch(getStockBuyFetch({stockPrice: data[0].latestPrice, stockSymbol: data[0].symbol, stockAmount: data[1].symbolAmount}))
+      })
+  }
+}
+
+export const getStockBuyFetch = data => {
+  return (dispatch, getState) => {
+    const stockData = {...data, userId: getState().currentUser.id}
+    return fetch("http://localhost:3000/api/v1/buyStock", {
+      method: "POST",
+      headers: {
+        'Content-Type': 'application/json',
+        'Accept': 'application/json'
+      },
+      body: JSON.stringify(stockData)
+    })
+      .then(resp => resp.json())
+      .then(data => {
         // data[0].latestPrice
       })
   }
