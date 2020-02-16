@@ -3,7 +3,6 @@ class Api::V1::StocksController < ApplicationController
 
     user = User.find(params[:userId])
     totalStockCost = (params[:stockPrice].to_f * params[:stockAmount].to_i)
-    byebug
 
     if user.money_amount >= totalStockCost
       newUserCashAmount = user.money_amount - totalStockCost
