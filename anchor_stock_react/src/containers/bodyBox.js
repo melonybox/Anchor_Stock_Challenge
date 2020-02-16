@@ -1,16 +1,21 @@
 import React, {Component} from 'react';
+import {connect} from 'react-redux';
 import AccountScreen from '../components/accountScreen.js';
 import PortfolioScreen from '../components/portfolioScreen.js';
 
 class BodyBox extends Component {
   render(){
-    return(
-      <>
-      <AccountScreen />
-      <PortfolioScreen />
-      </>
-    )
+    switch (this.props.bodyView) {
+      case "portfolio":
+        return <PortfolioScreen />
+      default:
+        return <AccountScreen />
+    }
   }
 }
 
-export default BodyBox
+const mapStateToProps = state => ({
+  bodyView: state.bodyView
+})
+
+export default connect(mapStateToProps,null)(BodyBox)
