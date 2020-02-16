@@ -103,11 +103,27 @@ export const getStockBatchFetch = data => {
     })
       .then(resp => Promise.all([resp.json(),stockData]))
       .then(data => {
-        // data[1].AAPL
-        // data[0].AAPL.quote.open
-        // data[0].AAPL.quote.latestPrice
-        debugger
-        // dispatch(getStockBuyFetch({stockPrice: data[0].latestPrice, stockSymbol: data[0].symbol, stockAmount: data[1].symbolAmount}))
+        let stockReducerData = {}
+
+        for (let i = 0; i < (Object.keys(data[0]).length); i++) {
+          const latestPrice = Object.entries(data[0])[i][1].quote.latestPrice
+          const openPrice = Object.entries(data[0])[i][1].quote.open
+          const stockSymbol = Object.entries(data[0])[i][0]
+          const totalPrice = (Object.entries(data[0])[i][1].quote.latestPrice * Object.entries(stockData)[i][1])
+          const stockAmount = Object.entries(stockData)[i][1]
+          let stockColor = ''
+
+          if (latestPrice > openPrice) {
+            stockColor = 'greenText'
+          } else if (latestPrice < openPrice) {
+            stockColor = 'redText'
+          } else {
+            stockColor = 'greyText'
+          }
+          stockReducerData[i] = {symbol: stockSymbol, totalPrice: totalPrice, amount: stockAmount, stockTextColor: stockColor}
+
+        }
+        dispatch(fillPortfolioStocks(stockReducerData))
       })
   }
 }
@@ -115,4 +131,9 @@ export const getStockBatchFetch = data => {
 export const loginUser = data => ({
     type: 'LOGIN_USER',
     payload: data
+})
+
+export const fillPortfolioStocks = data => ({
+  type: 'FILL_PORTFOLIO_STOCKS',
+  payload: data
 })

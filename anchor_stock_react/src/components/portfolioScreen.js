@@ -27,16 +27,23 @@ class PortfolioScreen extends React.PureComponent {
     this.props.getStockFetch(data)
   }
 
-  renderPortfolio = (userStocks) => {
-  return null
+  renderPortfolio = (portfolioStocks) => {
+    return Object.values(portfolioStocks).map((item,idx) => {
+      return <tr key={idx}>
+               <td>{item.symbol} - {item.amount} Shares</td>
+               <td>${item.totalPrice}</td>
+             </tr>
+    })
   }
 
 
   render(){
     return(
-      <>
+      <div className="centerRow">
         <div>
-          {this.renderPortfolio(this.props.currentUser.stocks)}
+          <table>
+            {Object.keys(this.props.portfolioStocks).length === 0 ? null : this.renderPortfolio(this.props.portfolioStocks)}
+          </table>
         </div>
         <div>
           <p>Cash: ${this.props.currentUser.money_amount}</p>
@@ -52,13 +59,14 @@ class PortfolioScreen extends React.PureComponent {
             <input type='submit' name='submit' value='Buy' />
           </form>
         </div>
-      </>
+      </div>
     )
   }
 }
 
 const mapStateToProps = state => ({
-  currentUser: state.currentUser
+  currentUser: state.currentUser,
+  portfolioStocks: state.portfolioStocks
 })
 
 const mapDispatchToProps = dispatch => ({
