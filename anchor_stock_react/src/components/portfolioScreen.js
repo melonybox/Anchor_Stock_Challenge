@@ -28,7 +28,7 @@ class PortfolioScreen extends React.PureComponent {
 
   handleSubmit = event => {
     event.preventDefault()
-    if(parseInt(this.state.symbolAmount) === 0 || parseInt(this.state.symbolAmount) <= 0) {
+    if(this.state.symbolAmount === 0 || this.state.symbolAmount <= 0) {
       alert("Must have a quantity more then zero.")
     } else {
       const data = {...this.state}
@@ -68,7 +68,7 @@ class PortfolioScreen extends React.PureComponent {
               </div>
               <div>
                 <label>Qty: </label>
-                <input type='text' name='symbolAmount' placeholder='Qty' onChange={this.handleChange} />
+                <input type='number' name='symbolAmount' placeholder='Qty' onChange={this.handleChange} />
               </div>
               <input type='submit' name='submit' value='Buy' />
             </form>

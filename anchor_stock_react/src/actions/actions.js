@@ -55,9 +55,21 @@ export const getStockFetch = data => {
         'Accept': 'application/json'
       }
     })
-      .then(resp => Promise.all([resp.json(),data]))
+      .then(resp => {
+        if (resp.ok === false) {
+          if (resp.status === 404) {
+            return alert("Stock symbol not valid.")
+          }
+          return alert("Error")
+        } else {
+          return Promise.all([resp.json(),data])
+        }
+      })
       .then(data => {
         dispatch(getStockBuyFetch({stockPrice: data[0].latestPrice, stockSymbol: data[0].symbol, stockAmount: data[1].symbolAmount}))
+      })
+      .catch(() => {
+        console.log("Error")
       })
   }
 }
@@ -133,8 +145,8 @@ export const getStockBatchFetch = data => {
 }
 
 export const loginUser = data => ({
-    type: 'LOGIN_USER',
-    payload: data
+  type: 'LOGIN_USER',
+  payload: data
 })
 
 export const fillPortfolioStocks = data => ({
