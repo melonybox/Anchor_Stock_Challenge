@@ -11,6 +11,15 @@ export default function reducer(state = initialState, action) {
         return {...state, currentUser: action.payload, bodyView: 'portfolio'}
       case 'FILL_PORTFOLIO_STOCKS':
         return {...state, ...action.payload}
+      case 'ADD_STOCK_TO_USER':
+        return {...state,
+                currentUser: {
+                  ...state.currentUser,
+                  stocks: {
+                    ...state.currentUser.stocks,
+                    [state.currentUser.stocks.length]: action.payload
+                  }
+                }}
       default:
         return state;
   }

@@ -75,7 +75,8 @@ export const getStockBuyFetch = data => {
     })
       .then(resp => resp.json())
       .then(data => {
-        debugger
+        dispatch(addStockToUser(data.newStock))
+        dispatch(getStockBatchFetch(data.userData.stocks))
       })
   }
 }
@@ -110,7 +111,7 @@ export const getStockBatchFetch = data => {
           const latestPrice = Object.entries(data[0])[i][1].quote.latestPrice
           const openPrice = Object.entries(data[0])[i][1].quote.open
           const stockSymbol = Object.entries(data[0])[i][0]
-          const totalPrice = (Object.entries(data[0])[i][1].quote.latestPrice * Object.entries(stockData)[i][1])
+          const totalPrice = Math.round((Object.entries(data[0])[i][1].quote.latestPrice * Object.entries(stockData)[i][1])*100)/100
           const stockAmount = Object.entries(stockData)[i][1]
           let stockColor = ''
 
@@ -126,7 +127,7 @@ export const getStockBatchFetch = data => {
           stockReducerData[i] = {symbol: stockSymbol, totalPrice: totalPrice, amount: stockAmount, stockTextColor: stockColor}
 
         }
-        dispatch(fillPortfolioStocks({portfolioStocks: stockReducerData, portfolioPrice: portfolioPrice}))
+        dispatch(fillPortfolioStocks({portfolioStocks: stockReducerData, portfolioPrice: Math.round(portfolioPrice*100)/100}))
       })
   }
 }
@@ -138,5 +139,10 @@ export const loginUser = data => ({
 
 export const fillPortfolioStocks = data => ({
   type: 'FILL_PORTFOLIO_STOCKS',
+  payload: data
+})
+
+export const addStockToUser = data => ({
+  type: 'ADD_STOCK_TO_USER',
   payload: data
 })

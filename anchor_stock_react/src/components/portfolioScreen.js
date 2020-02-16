@@ -5,8 +5,14 @@ import {getStockFetch,getStockBatchFetch} from '../actions/actions.js'
 class PortfolioScreen extends React.PureComponent {
 
   componentDidMount = () => {
-    this.props.getStockBatchFetch(this.props.currentUser.stocks)
-    // window.addEventListener('resize', this.handleLoad);
+    if (Object.keys(this.props.currentUser.stocks).length > 0) {
+      this.props.getStockBatchFetch(this.props.currentUser.stocks)
+      this.stockInterval = setInterval(() => this.props.getStockBatchFetch(this.props.currentUser.stocks), 180000)
+    }
+  }
+
+  componentWillUnmount = () => {
+    clearInterval(this.stockInterval)
   }
 
   state = {
@@ -44,7 +50,9 @@ class PortfolioScreen extends React.PureComponent {
         <div className="centerRow">
           <div>
             <table>
-              {Object.keys(this.props.portfolioStocks).length === 0 ? null : this.renderPortfolio(this.props.portfolioStocks)}
+              <tbody>
+                {Object.keys(this.props.portfolioStocks).length === 0 ? null : this.renderPortfolio(this.props.portfolioStocks)}
+              </tbody>
             </table>
           </div>
           <div>
