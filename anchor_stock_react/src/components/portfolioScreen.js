@@ -30,8 +30,8 @@ class PortfolioScreen extends React.PureComponent {
   renderPortfolio = (portfolioStocks) => {
     return Object.values(portfolioStocks).map((item,idx) => {
       return <tr key={idx}>
-               <td>{item.symbol} - {item.amount} Shares</td>
-               <td>${item.totalPrice}</td>
+               <td><span className={item.stockTextColor}>{item.symbol}</span> - {item.amount} Shares</td>
+               <td className={item.stockTextColor}>${item.totalPrice}</td>
              </tr>
     })
   }
@@ -39,34 +39,38 @@ class PortfolioScreen extends React.PureComponent {
 
   render(){
     return(
-      <div className="centerRow">
-        <div>
-          <table>
-            {Object.keys(this.props.portfolioStocks).length === 0 ? null : this.renderPortfolio(this.props.portfolioStocks)}
-          </table>
+      <>
+        <p>Portfolio (${this.props.portfolioPrice})</p>
+        <div className="centerRow">
+          <div>
+            <table>
+              {Object.keys(this.props.portfolioStocks).length === 0 ? null : this.renderPortfolio(this.props.portfolioStocks)}
+            </table>
+          </div>
+          <div>
+            <p>Cash: ${this.props.currentUser.money_amount}</p>
+            <form onSubmit={this.handleSubmit}>
+              <div>
+                <label>Ticker: </label>
+                <input type='text' name='symbolSearch' placeholder='Ticker' onChange={this.handleChange} />
+              </div>
+              <div>
+                <label>Qty: </label>
+                <input type='text' name='symbolAmount' placeholder='Qty' onChange={this.handleChange} />
+              </div>
+              <input type='submit' name='submit' value='Buy' />
+            </form>
+          </div>
         </div>
-        <div>
-          <p>Cash: ${this.props.currentUser.money_amount}</p>
-          <form onSubmit={this.handleSubmit}>
-            <div>
-              <label>Ticker: </label>
-              <input type='text' name='symbolSearch' placeholder='Ticker' onChange={this.handleChange} />
-            </div>
-            <div>
-              <label>Qty: </label>
-              <input type='text' name='symbolAmount' placeholder='Qty' onChange={this.handleChange} />
-            </div>
-            <input type='submit' name='submit' value='Buy' />
-          </form>
-        </div>
-      </div>
+      </>
     )
   }
 }
 
 const mapStateToProps = state => ({
   currentUser: state.currentUser,
-  portfolioStocks: state.portfolioStocks
+  portfolioStocks: state.portfolioStocks,
+  portfolioPrice: state.portfolioPrice
 })
 
 const mapDispatchToProps = dispatch => ({

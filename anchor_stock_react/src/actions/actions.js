@@ -104,6 +104,7 @@ export const getStockBatchFetch = data => {
       .then(resp => Promise.all([resp.json(),stockData]))
       .then(data => {
         let stockReducerData = {}
+        let portfolioPrice = 0
 
         for (let i = 0; i < (Object.keys(data[0]).length); i++) {
           const latestPrice = Object.entries(data[0])[i][1].quote.latestPrice
@@ -112,6 +113,8 @@ export const getStockBatchFetch = data => {
           const totalPrice = (Object.entries(data[0])[i][1].quote.latestPrice * Object.entries(stockData)[i][1])
           const stockAmount = Object.entries(stockData)[i][1]
           let stockColor = ''
+
+          portfolioPrice += totalPrice
 
           if (latestPrice > openPrice) {
             stockColor = 'greenText'
@@ -123,7 +126,7 @@ export const getStockBatchFetch = data => {
           stockReducerData[i] = {symbol: stockSymbol, totalPrice: totalPrice, amount: stockAmount, stockTextColor: stockColor}
 
         }
-        dispatch(fillPortfolioStocks(stockReducerData))
+        dispatch(fillPortfolioStocks({portfolioStocks: stockReducerData, portfolioPrice: portfolioPrice}))
       })
   }
 }

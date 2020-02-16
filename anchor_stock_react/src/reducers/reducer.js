@@ -1,7 +1,8 @@
 const initialState = {
   currentUser: {},
   bodyView: 'default',
-  portfolioStocks: {}
+  portfolioStocks: {},
+  portfolioPrice: 0
 }
 
 export default function reducer(state = initialState, action) {
@@ -9,7 +10,7 @@ export default function reducer(state = initialState, action) {
       case 'LOGIN_USER':
         return {...state, currentUser: action.payload, bodyView: 'portfolio'}
       case 'FILL_PORTFOLIO_STOCKS':
-        return {...state, portfolioStocks: action.payload}
+        return {...state, ...action.payload}
       default:
         return state;
   }

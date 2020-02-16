@@ -25,3 +25,15 @@ code {
   flex-direction: column;
   align-items: center;
 }
+
+.greenText {
+  color: green;
+}
+
+.redText {
+  color: red;
+}
+
+.greyText {
+  color: grey;
+}
