@@ -111,11 +111,11 @@ export const getStockBatchFetch = data => {
           const latestPrice = Object.entries(data[0])[i][1].quote.latestPrice
           const openPrice = Object.entries(data[0])[i][1].quote.open
           const stockSymbol = Object.entries(data[0])[i][0]
-          const totalPrice = Math.round((Object.entries(data[0])[i][1].quote.latestPrice * Object.entries(stockData)[i][1])*100)/100
+          const totalPrice = (Math.round((Object.entries(data[0])[i][1].quote.latestPrice * Object.entries(stockData)[i][1])*100)/100).toFixed(2)
           const stockAmount = Object.entries(stockData)[i][1]
           let stockColor = ''
 
-          portfolioPrice += totalPrice
+          portfolioPrice += parseFloat(totalPrice)
 
           if (latestPrice > openPrice) {
             stockColor = 'greenText'
@@ -127,7 +127,7 @@ export const getStockBatchFetch = data => {
           stockReducerData[i] = {symbol: stockSymbol, totalPrice: totalPrice, amount: stockAmount, stockTextColor: stockColor}
 
         }
-        dispatch(fillPortfolioStocks({portfolioStocks: stockReducerData, portfolioPrice: Math.round(portfolioPrice*100)/100}))
+        dispatch(fillPortfolioStocks({portfolioStocks: stockReducerData, portfolioPrice: (Math.round(portfolioPrice*100)/100).toFixed(2)}))
       })
   }
 }

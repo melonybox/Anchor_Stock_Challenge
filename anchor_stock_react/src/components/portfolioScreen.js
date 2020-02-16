@@ -56,7 +56,7 @@ class PortfolioScreen extends React.PureComponent {
             </table>
           </div>
           <div>
-            <p>Cash: ${this.props.currentUser.money_amount}</p>
+            <p>Cash: ${this.props.currentUser.money_amount.toFixed(2)}</p>
             <form onSubmit={this.handleSubmit}>
               <div>
                 <label>Ticker: </label>
