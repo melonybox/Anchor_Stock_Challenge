@@ -28,9 +28,13 @@ class PortfolioScreen extends React.PureComponent {
 
   handleSubmit = event => {
     event.preventDefault()
-    const data = {...this.state}
+    if(parseInt(this.state.symbolAmount) === 0 || parseInt(this.state.symbolAmount) <= 0) {
+      alert("Must have a quantity more then zero.")
+    } else {
+      const data = {...this.state}
 
-    this.props.getStockFetch(data)
+      this.props.getStockFetch(data)
+    }
   }
 
   renderPortfolio = (portfolioStocks) => {

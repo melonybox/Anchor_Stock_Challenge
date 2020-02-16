@@ -15,10 +15,10 @@ export default function reducer(state = initialState, action) {
         return {...state,
                 currentUser: {
                   ...state.currentUser,
-                  stocks: {
+                  stocks: [
                     ...state.currentUser.stocks,
-                    [state.currentUser.stocks.length]: action.payload
-                  }
+                    action.payload
+                  ]
                 }}
       default:
         return state;
