@@ -1,8 +1,13 @@
 import React from 'react';
 import {connect} from 'react-redux';
-import {getStockFetch} from '../actions/actions.js'
+import {getStockFetch,getStockBatchFetch} from '../actions/actions.js'
 
 class PortfolioScreen extends React.PureComponent {
+
+  componentDidMount = () => {
+    this.props.getStockBatchFetch(this.props.currentUser.stocks)
+    // window.addEventListener('resize', this.handleLoad);
+  }
 
   state = {
     symbolSearch: '',
@@ -23,18 +28,7 @@ class PortfolioScreen extends React.PureComponent {
   }
 
   renderPortfolio = (userStocks) => {
-    let stockData = {}
-
-    for (let i = 0; i < userStocks.length; i++) {
-      if (stockData[userStocks[i].symbol] === undefined) {
-        stockData[userStocks[i].symbol] = userStocks[i].amount
-      } else {
-        stockData[userStocks[i].symbol] += userStocks[i].amount
-      }
-    }
-
-    const batchFetch = Object.keys(stockData).join("/")
-    debugger
+  return null
   }
 
 
@@ -69,6 +63,7 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = dispatch => ({
   getStockFetch: data => dispatch(getStockFetch(data)),
+  getStockBatchFetch: data => dispatch(getStockBatchFetch(data))
 })
 
 export default connect(mapStateToProps,mapDispatchToProps)(PortfolioScreen);

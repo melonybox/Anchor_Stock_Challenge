@@ -1,6 +1,7 @@
 const initialState = {
   currentUser: {},
-  bodyView: 'default'
+  bodyView: 'default',
+  portfolioStocks: {}
 }
 
 export default function reducer(state = initialState, action) {

@@ -80,6 +80,38 @@ export const getStockBuyFetch = data => {
   }
 }
 
+export const getStockBatchFetch = data => {
+  return (dispatch) => {
+    let stockData = {}
+
+    for (let i = 0; i < data.length; i++) {
+      if (stockData[data[i].symbol] === undefined) {
+        stockData[data[i].symbol] = data[i].amount
+      } else {
+        stockData[data[i].symbol] += data[i].amount
+      }
+    }
+
+    const batchFetch = Object.keys(stockData).join(",")
+
+    return fetch(`https://cloud.iexapis.com/stable/stock/market/batch?symbols=${batchFetch}&types=quote&token=${process.env.REACT_APP_API_KEY}`, {
+      method: "GET",
+      headers: {
+        'Content-Type': 'application/json',
+        'Accept': 'application/json'
+      }
+    })
+      .then(resp => Promise.all([resp.json(),stockData]))
+      .then(data => {
+        // data[1].AAPL
+        // data[0].AAPL.quote.open
+        // data[0].AAPL.quote.latestPrice
+        debugger
+        // dispatch(getStockBuyFetch({stockPrice: data[0].latestPrice, stockSymbol: data[0].symbol, stockAmount: data[1].symbolAmount}))
+      })
+  }
+}
+
 export const loginUser = data => ({
     type: 'LOGIN_USER',
     payload: data
