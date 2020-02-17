@@ -7,7 +7,7 @@
 
 Rails.application.config.middleware.insert_before 0, Rack::Cors do
   allow do
-    origins 'fierce-castle-80636.herokuapp.com'
+    origins 'shielded-plateau-63161.herokuapp.com'
 
     resource '*',
       headers: :any,
