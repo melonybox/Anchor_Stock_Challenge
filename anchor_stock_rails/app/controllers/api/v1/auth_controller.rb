@@ -2,7 +2,7 @@ class Api::V1::AuthController < ApplicationController
   def login
     user = User.find_by(email: params[:email])
     if user && user.authenticate(params[:password])
-      # if user matches and password is valid
+      # if user and password is valid
       token = encode_token(user.id)
       render json: {user: UserSerializer.new(user), token: token}
     else
