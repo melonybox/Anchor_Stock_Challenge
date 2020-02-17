@@ -11,6 +11,8 @@ class Api::V1::StocksController < ApplicationController
 
       data = {userData: UserSerializer.new(user), newStock: StockSerializer.new(stock)}
       render json: data
-    end
+    else
+			render json: {errors: "Not enough cash for purchase."}
+		end
   end
 end
