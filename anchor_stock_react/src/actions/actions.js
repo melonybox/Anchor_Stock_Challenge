@@ -87,8 +87,12 @@ export const getStockBuyFetch = data => {
     })
       .then(resp => resp.json())
       .then(data => {
-        dispatch(addStockToUser(data.newStock))
-        dispatch(getStockBatchFetch(data.userData.stocks))
+        if (data.errors){
+          alert(data.errors)
+        } else {
+          dispatch(addStockToUser({newStock: data.newStock, newUserMoneyAmount: data.userData.money_amount}))
+          dispatch(getStockBatchFetch(data.userData.stocks))
+        }
       })
   }
 }

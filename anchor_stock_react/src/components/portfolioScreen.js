@@ -49,32 +49,35 @@ class PortfolioScreen extends React.PureComponent {
 
   render(){
     return(
-      <>
-        <p>Portfolio (${this.props.portfolioPrice})</p>
-        <div className="centerRow">
+      <div className="centerRow">
+        <div className="centerColumn">
+          <p>Portfolio (${this.props.portfolioPrice})</p>
+          {this.props.currentUser.stocks.length === 0 ?
+            <p>No stocks in portfolio.</p>
+          :
           <div>
             <table>
               <tbody>
                 {Object.keys(this.props.portfolioStocks).length === 0 ? null : this.renderPortfolio(this.props.portfolioStocks)}
               </tbody>
             </table>
-          </div>
-          <div>
-            <p>Cash: ${this.props.currentUser.money_amount.toFixed(2)}</p>
-            <form onSubmit={this.handleSubmit}>
-              <div>
-                <label>Ticker: </label>
-                <input type='text' name='symbolSearch' placeholder='Ticker' onChange={this.handleChange} />
-              </div>
-              <div>
-                <label>Qty: </label>
-                <input type='number' name='symbolAmount' placeholder='Qty' onChange={this.handleChange} />
-              </div>
-              <input type='submit' name='submit' value='Buy' />
-            </form>
-          </div>
+          </div>}
         </div>
-      </>
+        <div className="centerColumn">
+          <p>Cash: ${this.props.currentUser.money_amount.toFixed(2)}</p>
+          <form onSubmit={this.handleSubmit}>
+            <div>
+              <label>Ticker: </label>
+              <input type='text' name='symbolSearch' placeholder='Ticker' onChange={this.handleChange} />
+            </div>
+            <div>
+              <label>Qty: </label>
+              <input type='number' name='symbolAmount' placeholder='Qty' onChange={this.handleChange} />
+            </div>
+            <input type='submit' name='submit' value='Buy' />
+          </form>
+        </div>
+      </div>
     )
   }
 }

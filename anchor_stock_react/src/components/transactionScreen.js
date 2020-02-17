@@ -5,8 +5,11 @@ class TransactionScreen extends React.PureComponent {
 
   render(){
     return(
-      <div>
+      <div className="centerColumn">
         <p>Transactions</p>
+        {this.props.currentUser.stocks.length === 0 ?
+          <p>No transaction history.</p>
+        :
         <table>
           <tbody>
             {this.props.currentUser.stocks.map((item,idx) => {
@@ -15,7 +18,7 @@ class TransactionScreen extends React.PureComponent {
                      </tr>
             })}
           </tbody>
-        </table>
+        </table>}
       </div>
     )
   }

@@ -15,9 +15,10 @@ export default function reducer(state = initialState, action) {
         return {...state,
                 currentUser: {
                   ...state.currentUser,
+                  money_amount: action.payload.newUserMoneyAmount,
                   stocks: [
                     ...state.currentUser.stocks,
-                    action.payload
+                    action.payload.newStock
                   ]
                 }}
       case 'HANDLE_SCREEN_SWITCH':
