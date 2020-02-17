@@ -1,6 +1,9 @@
 export const userLoginFetch = data => {
+  //data contains email and password
   return dispatch => {
+    //this is part of redux-thunk
     return fetch("https://frozen-ravine-06122.herokuapp.com/api/v1/login", {
+      //fetch to backend rails api
       method: "POST",
       headers: {
         'Content-Type': 'application/json',
@@ -23,8 +26,11 @@ export const userLoginFetch = data => {
 }
 
 export const userCreateFetch = data => {
+  //data contains username, email and password
   return dispatch => {
+    //this is part of redux thunk
     return fetch("https://frozen-ravine-06122.herokuapp.com/api/v1/users", {
+      //fetch to backend rails api
       method: "POST",
       headers: {
         'Content-Type': 'application/json',
@@ -47,8 +53,10 @@ export const userCreateFetch = data => {
 }
 
 export const getStockFetch = data => {
+  //data contains symbol and amount
   return dispatch => {
     return fetch(`https://cloud.iexapis.com/stable/stock/${data.symbolSearch}/quote?token=${process.env.REACT_APP_API_KEY}`, {
+      //fetch to the api, here the api is protected from github
       method: "GET",
       headers: {
         'Content-Type': 'application/json',
@@ -63,6 +71,7 @@ export const getStockFetch = data => {
           return alert("Error")
         } else {
           return Promise.all([resp.json(),data])
+          //return a resolved promise along with passed on data
         }
       })
       .then(data => {
@@ -75,8 +84,10 @@ export const getStockFetch = data => {
 }
 
 export const getStockBuyFetch = data => {
+  //data contains part of the information to make a new stock in the rails api
   return (dispatch, getState) => {
     const stockData = {...data, userId: getState().currentUser.id}
+    //getstate is used to get the userid for making the stock
     return fetch("https://frozen-ravine-06122.herokuapp.com/api/v1/buyStock", {
       method: "POST",
       headers: {
@@ -98,6 +109,7 @@ export const getStockBuyFetch = data => {
 }
 
 export const getStockBatchFetch = data => {
+  //data contains stock data
   return (dispatch) => {
     let stockData = {}
 
@@ -108,10 +120,13 @@ export const getStockBatchFetch = data => {
         stockData[data[i].symbol] += data[i].amount
       }
     }
+    //create a object of unique symbols and total amount of that symbol
 
     const batchFetch = Object.keys(stockData).join(",")
+    //format unique symbols created above for stock api fetch
 
     return fetch(`https://cloud.iexapis.com/stable/stock/market/batch?symbols=${batchFetch}&types=quote&token=${process.env.REACT_APP_API_KEY}`, {
+      //api key is protected here from github public
       method: "GET",
       headers: {
         'Content-Type': 'application/json',
@@ -119,6 +134,7 @@ export const getStockBatchFetch = data => {
       }
     })
       .then(resp => Promise.all([resp.json(),stockData]))
+      //return a resolved promise along with passed on data created above
       .then(data => {
         let stockReducerData = {}
         let portfolioPrice = 0
@@ -140,6 +156,7 @@ export const getStockBatchFetch = data => {
           } else {
             stockColor = 'greyText'
           }
+          //created needed format for portfolio screen to be easily handled
 
           stockReducerData[i] = {symbol: stockSymbol, totalPrice: totalPrice, amount: stockAmount, stockTextColor: stockColor}
 

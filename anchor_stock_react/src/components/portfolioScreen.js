@@ -6,6 +6,7 @@ class PortfolioScreen extends React.PureComponent {
 
   componentDidMount = () => {
     if (this.props.currentUser.stocks.length > 0) {
+      //check if user has stocks
       this.props.getStockBatchFetch(this.props.currentUser.stocks)
       this.startStockInterval()
     }
@@ -13,6 +14,7 @@ class PortfolioScreen extends React.PureComponent {
 
   componentDidUpdate = (prevProps) => {
     if (prevProps.currentUser.stocks.length > 0 && this.stockInterval === undefined) {
+      //check if user has stocks and stockinterval exists
       this.startStockInterval()
     }
   }
@@ -40,6 +42,7 @@ class PortfolioScreen extends React.PureComponent {
   handleSubmit = event => {
     event.preventDefault()
     if(this.state.symbolAmount === 0 || this.state.symbolAmount <= 0) {
+      //stock quantity cannot be 0 or less then 0
       alert("Must have a quantity more then zero.")
     } else {
       const data = {...this.state}

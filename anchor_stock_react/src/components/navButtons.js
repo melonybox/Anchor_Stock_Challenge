@@ -6,8 +6,10 @@ class NavButtons extends React.PureComponent {
 
   handleClick = event => {
     if (event.target.name === 'portfolio' && event.target.name !== this.props.bodyView) {
+      //check if element name matches and element name is not same on reducer state
       this.props.handleScreenSwitch('portfolio')
     } else if (event.target.name === 'transactions' && event.target.name !== this.props.bodyView) {
+      //check if element name matches and element name is not same on reducer state
       this.props.handleScreenSwitch('transactions')
     }
   }
