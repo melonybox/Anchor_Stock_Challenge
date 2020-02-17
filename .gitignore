@@ -34,6 +34,9 @@ anchor_stock_react/.pnp.js
 # testing
 anchor_stock_react/coverage
 
+# production
+anchor_stock_react/build
+
 # misc
 anchor_stock_react/.DS_Store
 anchor_stock_react/.env.local
