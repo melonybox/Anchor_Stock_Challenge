@@ -1,6 +1,6 @@
 export const userLoginFetch = data => {
   return dispatch => {
-    return fetch("still-spire-88346.herokuapp.com/api/v1/login", {
+    return fetch("fierce-castle-80636.herokuapp.com/api/v1/login", {
       method: "POST",
       headers: {
         'Content-Type': 'application/json',
@@ -24,7 +24,7 @@ export const userLoginFetch = data => {
 
 export const userCreateFetch = data => {
   return dispatch => {
-    return fetch("still-spire-88346.herokuapp.com/api/v1/users", {
+    return fetch("fierce-castle-80636.herokuapp.com/api/v1/users", {
       method: "POST",
       headers: {
         'Content-Type': 'application/json',
@@ -77,7 +77,7 @@ export const getStockFetch = data => {
 export const getStockBuyFetch = data => {
   return (dispatch, getState) => {
     const stockData = {...data, userId: getState().currentUser.id}
-    return fetch("still-spire-88346.herokuapp.com/api/v1/buyStock", {
+    return fetch("fierce-castle-80636.herokuapp.com/api/v1/buyStock", {
       method: "POST",
       headers: {
         'Content-Type': 'application/json',
