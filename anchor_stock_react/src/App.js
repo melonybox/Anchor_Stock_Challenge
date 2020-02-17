@@ -1,5 +1,4 @@
 import React, {Component} from 'react';
-import './App.css';
 import {connect} from 'react-redux';
 import BodyBox from './containers/bodyBox.js';
 import NavBox from './containers/navBox.js';
@@ -7,7 +6,7 @@ import NavBox from './containers/navBox.js';
 class App extends Component {
   render(){
     return (
-      <div className="App">
+      <div>
         {Object.keys(this.props.currentUser).length === 0 ? null : <NavBox />}
         <BodyBox />
       </div>

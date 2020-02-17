@@ -14,7 +14,7 @@ class NavButtons extends React.PureComponent {
 
   render(){
     return(
-      <div>
+      <div className="navBarButtons">
         <button type='button' name='portfolio' onClick={this.handleClick}>Portfolio</button>
         <button type='button' name='transactions' onClick={this.handleClick}>Transactions</button>
       </div>

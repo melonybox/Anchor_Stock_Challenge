@@ -60,21 +60,21 @@ class PortfolioScreen extends React.PureComponent {
 
   render(){
     return(
-      <div className="centerRow">
-        <div className="centerColumn">
-          <p>Portfolio (${this.props.portfolioPrice})</p>
+      <div className="centerRowTable">
+        <div className="centerColumn tableAlignLeft">
           {this.props.currentUser.stocks.length === 0 ?
             <p>No stocks in portfolio.</p>
           :
           <div>
             <table>
+              <thead>Portfolio (${this.props.portfolioPrice})</thead>
               <tbody>
                 {Object.keys(this.props.portfolioStocks).length === 0 ? null : this.renderPortfolio(this.props.portfolioStocks)}
               </tbody>
             </table>
           </div>}
         </div>
-        <div className="centerColumn">
+        <div className="centerColumn formAlignCenter">
           <p>Cash: ${this.props.currentUser.money_amount.toFixed(2)}</p>
           <form onSubmit={this.handleSubmit}>
             <div>

@@ -50,7 +50,11 @@ class AccountScreen extends React.PureComponent {
 
   render(){
     return(
-      <div>
+      <div className="centerColumn centerScreen accountBorder">
+        {this.state.currAccView === 'createAcc' ?
+        <p>Register</p>
+        :
+        <p>Login</p>}
         <form className="centerColumn" id='accountForm' onSubmit={this.handleSubmit}>
         {this.state.currAccView === 'createAcc' ?
         <div>
