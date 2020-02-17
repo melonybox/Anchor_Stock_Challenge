@@ -30,6 +30,7 @@ anchor_stock_rails/config/master.key
 anchor_stock_react/node_modules
 anchor_stock_react/.pnp
 anchor_stock_react/.pnp.js
+anchor_stock_react/.env
 
 # testing
 anchor_stock_react/coverage
