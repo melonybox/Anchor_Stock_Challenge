@@ -47,6 +47,3 @@ anchor_stock_react/.env.production.local
 anchor_stock_react/npm-debug.log*
 anchor_stock_react/yarn-debug.log*
 anchor_stock_react/yarn-error.log*
-
-# env
-anchor_stock_react/.env
