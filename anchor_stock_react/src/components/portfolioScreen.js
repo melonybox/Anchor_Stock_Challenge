@@ -5,9 +5,15 @@ import {getStockFetch,getStockBatchFetch} from '../actions/actions.js';
 class PortfolioScreen extends React.PureComponent {
 
   componentDidMount = () => {
-    if (Object.keys(this.props.currentUser.stocks).length > 0) {
+    if (this.props.currentUser.stocks.length > 0) {
       this.props.getStockBatchFetch(this.props.currentUser.stocks)
-      this.stockInterval = setInterval(() => this.props.getStockBatchFetch(this.props.currentUser.stocks), 180000)
+      this.startStockInterval()
+    }
+  }
+
+  componentDidUpdate = (prevProps) => {
+    if (prevProps.currentUser.stocks.length > 0 && this.stockInterval === undefined) {
+      this.startStockInterval()
     }
   }
 
@@ -15,9 +21,14 @@ class PortfolioScreen extends React.PureComponent {
     clearInterval(this.stockInterval)
   }
 
+
   state = {
     symbolSearch: '',
     symbolAmount: 0
+  }
+
+  startStockInterval = () => {
+    return this.stockInterval = setInterval(() => this.props.getStockBatchFetch(this.props.currentUser.stocks), 180000)
   }
 
   handleChange = event => {
