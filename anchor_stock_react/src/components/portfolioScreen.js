@@ -1,6 +1,6 @@
 import React from 'react';
 import {connect} from 'react-redux';
-import {getStockFetch,getStockBatchFetch} from '../actions/actions.js'
+import {getStockFetch,getStockBatchFetch} from '../actions/actions.js';
 
 class PortfolioScreen extends React.PureComponent {
 

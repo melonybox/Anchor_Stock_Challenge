@@ -20,6 +20,8 @@ export default function reducer(state = initialState, action) {
                     action.payload
                   ]
                 }}
+      case 'HANDLE_SCREEN_SWITCH':
+          return {...state, bodyView: action.payload}
       default:
         return state;
   }

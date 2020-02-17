@@ -1,6 +1,6 @@
 import React from 'react';
 import {connect} from 'react-redux';
-import {userCreateFetch,userLoginFetch} from '../actions/actions.js'
+import {userCreateFetch,userLoginFetch} from '../actions/actions.js';
 
 class AccountScreen extends React.PureComponent {
   state = {

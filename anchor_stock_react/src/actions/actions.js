@@ -136,6 +136,7 @@ export const getStockBatchFetch = data => {
           } else {
             stockColor = 'greyText'
           }
+
           stockReducerData[i] = {symbol: stockSymbol, totalPrice: totalPrice, amount: stockAmount, stockTextColor: stockColor}
 
         }
@@ -156,5 +157,10 @@ export const fillPortfolioStocks = data => ({
 
 export const addStockToUser = data => ({
   type: 'ADD_STOCK_TO_USER',
+  payload: data
+})
+
+export const handleScreenSwitch = data => ({
+  type:'HANDLE_SCREEN_SWITCH',
   payload: data
 })
